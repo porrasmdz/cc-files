@@ -35,6 +35,17 @@ local function wrapText(text, maxWidth)
 
     return lines
 end
+
+local clean = {}
+
+for _, l in ipairs(lines) do
+    if l ~= "" then
+        table.insert(clean, l)
+    end
+end
+
+lines = clean
+
 display.clear()
 display.setCursorPos(1, 1)
 local lines = wrapText(msg, width)
