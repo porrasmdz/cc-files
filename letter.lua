@@ -60,34 +60,13 @@ for _, line in ipairs(lines) do
 end
 
 
--- INIFINITE LOOP
-while true do
+display.setCursorPos(1, 1)
+for i, line in ipairs(lines) do
+    if i > height then break end 
 
-    for offset = 1, width * 2 + #msg do
-
-        display.clear()
-
-        for i, line in ipairs(animated) do
-            if i > height then break end
-
-            local part = line:sub(offset, offset + width - 1)
-
-            display.setCursorPos(1, i)
-            display.write(part)
-        end
-
-        display.update()
-        sleep(0.15) -- velocidad (menor = más rápido)
-    end
+    display.setCursorPos(1, i)
+    display.write(line)
 end
---STATIC MODE
--- display.setCursorPos(1, 1)
--- for i, line in ipairs(lines) do
---     if i > height then break end 
-
---     display.setCursorPos(1, i)
---     display.write(line)
--- end
--- display.setCursorPos(1, height)
--- display.update()
+display.setCursorPos(1, height)
+display.update()
 

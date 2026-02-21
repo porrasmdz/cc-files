@@ -60,7 +60,7 @@ for _, line in ipairs(lines) do
 end
 
 
--- INIFINITE LOOP
+-- INIFINITE LOOP SHOUDLDNT CALC MAXWIDTH BECAUSE IT IS "INFIINITE"
 while true do
 
     for offset = 1, #animated[1] - width + 1 do
