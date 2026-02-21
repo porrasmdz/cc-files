@@ -63,7 +63,7 @@ end
 -- INIFINITE LOOP
 while true do
 
-    for offset = 1, width * 2 + #msg do
+    for offset = 1, #animated[1] - width + 1 do
 
         display.clear()
 
@@ -77,8 +77,9 @@ while true do
         end
 
         display.update()
-        sleep(0.15) -- velocidad (menor = más rápido)
+        sleep(0.15)
     end
+
 end
 --STATIC MODE
 -- display.setCursorPos(1, 1)
