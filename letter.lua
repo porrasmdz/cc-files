@@ -11,30 +11,8 @@ end
 
 
 local display = peripheral.wrap("top")
-local width, height = display.getSize()
--- local function wrapText(text, maxWidth)
---     local lines = {}
---     local line = ""
+local height, width = display.getSize()
 
---     for word in text:gmatch("%S+") do
---         if #line + #word + 1 <= maxWidth then
---             if line == "" then
---                 line = word
---             else
---                 line = line .. " " .. word
---             end
---         else
---             table.insert(lines, line)
---             line = word
---         end
---     end
-
---     if line ~= "" then
---         table.insert(lines, line)
---     end
-
---     return lines
--- end
 local function wrapText(text, maxWidth)
     local lines = {}
     local line = ""
@@ -70,12 +48,45 @@ end
 lines = clean
 
 display.clear()
-display.setCursorPos(1, 1)
-for i, line in ipairs(lines) do
-    if i > height then break end 
-
-    display.setCursorPos(1, i)
-    display.write(line)
+local function pad(text, width)
+    return string.rep(" ", width) .. text .. string.rep(" ", width)
 end
-display.setCursorPos(1, height)
-display.update()
+
+local animated = {}
+
+for _, line in ipairs(lines) do
+    table.insert(animated, pad(line, width))
+end
+
+
+-- INIFINITE LOOP
+while true do
+
+    for offset = 1, width * 2 + #msg do
+
+        display.clear()
+
+        for i, line in ipairs(animated) do
+            if i > height then break end
+
+            local part = line:sub(offset, offset + width - 1)
+
+            display.setCursorPos(1, i)
+            display.write(part)
+        end
+
+        display.update()
+        sleep(0.15) -- velocidad (menor = más rápido)
+    end
+end
+--STATIC MODE
+-- display.setCursorPos(1, 1)
+-- for i, line in ipairs(lines) do
+--     if i > height then break end 
+
+--     display.setCursorPos(1, i)
+--     display.write(line)
+-- end
+-- display.setCursorPos(1, height)
+-- display.update()
+
