@@ -35,10 +35,11 @@ local function wrapText(text, maxWidth)
 
     return lines
 end
-
+display.clear()
+display.setCursorPos(1, 1)
 local lines = wrapText(msg, width)
 for i, line in ipairs(lines) do
-    if i > height - 1 then break end -- deja espacio para "System OK"
+    if i > height then break end 
 
     display.setCursorPos(1, i)
     display.write(line)
